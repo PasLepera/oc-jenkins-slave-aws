@@ -57,7 +57,8 @@ RUN yum makecache && \
 
 RUN virtualenv $HOME/venv && \
     . $HOME/venv/bin/activate && \
-    pip install -U pip
+    pip install -U pip && \
+    pip install --upgrade awscli 
 
 ENV ENV $HOME/venv/bin/activate
 ENV BASH_ENV $HOME/venv/bin/activate
