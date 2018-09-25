@@ -54,7 +54,7 @@ RUN yum install -y \
     python \
     python-pip \
     python-virtualenv \
-    pip install awscli && \
+    pip install awscli
 
 # Run the Jenkins JNLP client
 ENTRYPOINT ["/usr/local/bin/run-jnlp-client"]
