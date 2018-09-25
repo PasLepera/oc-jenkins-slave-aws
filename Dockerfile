@@ -53,7 +53,7 @@ ADD contrib/bin/* /usr/local/bin/
 RUN yum install -y \
     python \
     python-pip \
-    python-virtualenv \
+    python-virtualenv &&\
     pip install awscli
 
 # Run the Jenkins JNLP client
