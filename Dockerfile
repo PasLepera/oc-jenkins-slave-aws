@@ -50,11 +50,22 @@ RUN yum install -y centos-release-scl-rh && \
 # Copy the entrypoint
 ADD contrib/bin/* /usr/local/bin/
 
-RUN yum install -y \
-    python \
-    python-pip \
-    python-virtualenv &&\
-    pip install awscli
+RUN yum makecache && \
+    yum install -y epel-release && \
+    yum install -y python2-pip python-virtualenv gcc && \
+    yum clean all -y
+
+RUN virtualenv $HOME/venv && \
+    . $HOME/venv/bin/activate && \
+    pip install -U pip
+
+ENV ENV $HOME/venv/bin/activate
+ENV BASH_ENV $HOME/venv/bin/activate
+
+RUN chown -R 1001:0 $HOME && \
+    chmod -R g+rw $HOME
+    
+USER 1001
 
 # Run the Jenkins JNLP client
 ENTRYPOINT ["/usr/local/bin/run-jnlp-client"]
