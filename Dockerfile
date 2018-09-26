@@ -69,8 +69,7 @@ RUN chown -R 1001:0 /usr/local/bin/ && \
     
 USER 1001
 
-RUN pip install --upgrade pip && \
-    pip install --upgrade awscli 
+RUN pip install --upgrade awscli 
 
 # Run the Jenkins JNLP client
 ENTRYPOINT ["/usr/local/bin/run-jnlp-client"]
