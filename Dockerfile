@@ -56,19 +56,21 @@ RUN yum makecache && \
     yum clean all -y
 
 RUN virtualenv $HOME/venv && \
-    . $HOME/venv/bin/activate && \
-    pip install -U pip && \
-    pip install --upgrade awscli 
+    . $HOME/venv/bin/activate
+
+RUN chown -R 1001:0 $HOME && \
+    chmod -R g+rw $HOME
 
 ENV ENV $HOME/venv/bin/activate
 ENV BASH_ENV $HOME/venv/bin/activate
 
-RUN chown -R 1001:0 $HOME && \
-    chown -R 1001:0 /usr/local/bin/ && \
-    chmod -R g+rw $HOME && \
+RUN chown -R 1001:0 /usr/local/bin/ && \
     chmod -R +x /usr/local/bin/
     
 USER 1001
+
+RUN pip install --upgrade pip && \
+    pip install --upgrade awscli 
 
 # Run the Jenkins JNLP client
 ENTRYPOINT ["/usr/local/bin/run-jnlp-client"]
