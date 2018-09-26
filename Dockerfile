@@ -65,11 +65,10 @@ ENV ENV $HOME/venv/bin/activate
 ENV BASH_ENV $HOME/venv/bin/activate
 
 RUN chown -R 1001:0 /usr/local/bin/ && \
-    chmod -R +x /usr/local/bin/
+    chmod -R +x /usr/local/bin/ && \
+    pip install --upgrade awscli
     
-USER 1001
-
-RUN pip install --upgrade awscli 
+USER 1001 
 
 # Run the Jenkins JNLP client
 ENTRYPOINT ["/usr/local/bin/run-jnlp-client"]
