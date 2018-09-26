@@ -64,7 +64,9 @@ ENV ENV $HOME/venv/bin/activate
 ENV BASH_ENV $HOME/venv/bin/activate
 
 RUN chown -R 1001:0 $HOME && \
-    chmod -R g+rw $HOME
+    chown -R 1001:0 /usr/local/bin/ && \
+    chmod -R g+rw $HOME && \
+    chmod -R +x usr/local/bin/
     
 USER 1001
 
